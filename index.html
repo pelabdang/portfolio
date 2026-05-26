@@ -1,0 +1,681 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Angelo Pelisson — Senior Data Scientist</title>
+  <meta name="description" content="Senior Data Scientist building production ML systems for industrial domains. Computer vision, predictive maintenance, MLOps." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..900,0..100,0..1&family=Newsreader:opsz,wght@6..72,300..700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg:           #F7F4EC;        /* warm paper */
+      --bg-2:         #EFEAE0;        /* deeper paper */
+      --ink:          #1A1612;        /* near-black warm */
+      --ink-2:        #4B4239;        /* secondary text */
+      --ink-3:        #8A7F71;        /* tertiary text */
+      --line:         #D9D2C4;        /* dividers */
+      --accent:       #0B4F4A;        /* deep petroleum */
+      --accent-soft:  #D5E5E1;        /* accent tint */
+      --highlight:    #C9A66B;        /* brass/amber */
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 18px;
+      line-height: 1.6;
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      font-variation-settings: 'opsz' 16;
+    }
+
+    /* subtle paper noise */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 100;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    ::selection { background: var(--accent); color: var(--bg); }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px solid var(--line);
+      transition: border-color .2s ease, color .2s ease;
+    }
+    a:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ---------- LAYOUT ---------- */
+    .wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    nav.top {
+      position: sticky; top: 0; z-index: 50;
+      background: color-mix(in oklab, var(--bg) 88%, transparent);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--line);
+    }
+    nav.top .wrap {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-top: 18px; padding-bottom: 18px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    nav.top a { border: 0; color: var(--ink-2); }
+    nav.top a:hover { color: var(--accent); }
+    nav.top .name { color: var(--ink); font-weight: 500; }
+    nav.top ul { list-style: none; display: flex; gap: 28px; padding: 0; margin: 0; }
+    nav.top ul li { margin-left: 28px; }
+    nav.top ul li:first-child { margin-left: 0; }
+
+    /* ---------- HERO ---------- */
+    .hero { padding: 120px 0 80px; }
+    .hero .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      margin-bottom: 28px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .hero .eyebrow::before {
+      content: ''; width: 36px; height: 1px; background: var(--ink-3);
+    }
+    .hero h1 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-weight: 350;
+      font-variation-settings: 'opsz' 144, 'SOFT' 30, 'WONK' 1;
+      font-size: clamp(56px, 9vw, 104px);
+      line-height: 0.95;
+      letter-spacing: -0.025em;
+      margin: 0 0 36px;
+      color: var(--ink);
+    }
+    .hero h1 em {
+      font-style: italic;
+      font-weight: 350;
+      font-variation-settings: 'opsz' 144, 'SOFT' 100, 'WONK' 1;
+      color: var(--accent);
+    }
+    .hero .lede {
+      font-family: 'Newsreader', serif;
+      font-size: 22px;
+      line-height: 1.5;
+      color: var(--ink-2);
+      max-width: 600px;
+      margin: 0 0 44px;
+      font-variation-settings: 'opsz' 22;
+    }
+    .hero .ctas {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+    }
+    .hero .ctas a {
+      border: 1px solid var(--ink);
+      padding: 12px 20px;
+      border-radius: 999px;
+      transition: all .2s ease;
+      margin-right: 8px;
+      margin-bottom: 8px;
+    }
+    .hero .ctas a:hover {
+      background: var(--ink);
+      color: var(--bg);
+      border-color: var(--ink);
+    }
+    .hero .ctas a.primary {
+      background: var(--ink);
+      color: var(--bg);
+    }
+    .hero .ctas a.primary:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    /* ---------- SECTIONS ---------- */
+    section { padding: 80px 0; }
+    section + section { border-top: 1px solid var(--line); }
+
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      margin-bottom: 56px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .section-label::before {
+      content: attr(data-num);
+      font-weight: 500;
+      color: var(--accent);
+    }
+    .section-label::after {
+      content: ''; flex: 1; height: 1px; background: var(--line);
+    }
+
+    h2.title {
+      font-family: 'Fraunces', serif;
+      font-weight: 400;
+      font-variation-settings: 'opsz' 72;
+      font-size: clamp(36px, 5vw, 52px);
+      line-height: 1.05;
+      letter-spacing: -0.015em;
+      margin: 0 0 40px;
+      color: var(--ink);
+    }
+
+    /* ---------- ABOUT ---------- */
+    .about p {
+      font-size: 19px;
+      line-height: 1.65;
+      color: var(--ink-2);
+      margin: 0 0 24px;
+      font-variation-settings: 'opsz' 19;
+    }
+    .about p strong { color: var(--ink); font-weight: 600; }
+
+    /* ---------- WORK ---------- */
+    .work-entry {
+      padding: 36px 0;
+      border-top: 1px solid var(--line);
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .work-entry:last-child { border-bottom: 1px solid var(--line); }
+
+    .work-entry .meta {
+      display: flex; justify-content: space-between; align-items: baseline;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+    }
+    .work-entry .meta .num { color: var(--accent); font-weight: 500; }
+
+    .work-entry h3 {
+      font-family: 'Fraunces', serif;
+      font-weight: 400;
+      font-variation-settings: 'opsz' 36;
+      font-size: 28px;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      margin: 0;
+      color: var(--ink);
+    }
+
+    .work-entry .blurb {
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--ink-2);
+      margin: 8px 0 0;
+      font-variation-settings: 'opsz' 17;
+    }
+
+    .work-entry .metrics {
+      display: flex; flex-wrap: wrap; gap: 32px;
+      margin-top: 12px;
+    }
+    .work-entry .metrics .metric {
+      display: flex; flex-direction: column;
+      margin-right: 32px;
+      margin-bottom: 4px;
+    }
+    .work-entry .metrics .metric:last-child { margin-right: 0; }
+    .work-entry .metrics .metric .v {
+      font-family: 'Fraunces', serif;
+      font-weight: 400;
+      font-variation-settings: 'opsz' 72;
+      font-size: 32px;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: var(--accent);
+    }
+    .work-entry .metrics .metric .k {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      margin-top: 6px;
+    }
+
+    .work-entry .tags {
+      display: flex; flex-wrap: wrap; gap: 6px;
+      margin-top: 6px;
+    }
+    .work-entry .tags span {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      padding: 4px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--ink-2);
+      letter-spacing: 0.02em;
+      margin-right: 4px;
+      margin-bottom: 4px;
+    }
+
+    /* ---------- PUBLICATIONS ---------- */
+    .pub {
+      padding: 28px 0;
+      border-top: 1px solid var(--line);
+    }
+    .pub:last-child { border-bottom: 1px solid var(--line); }
+    .pub .pub-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      margin-bottom: 10px;
+    }
+    .pub .pub-title {
+      font-family: 'Fraunces', serif;
+      font-weight: 400;
+      font-variation-settings: 'opsz' 36;
+      font-size: 22px;
+      line-height: 1.3;
+      letter-spacing: -0.005em;
+      color: var(--ink);
+      font-style: italic;
+      margin: 0 0 8px;
+    }
+    .pub .pub-authors { color: var(--ink-2); font-size: 16px; }
+    .pub .pub-doi {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      margin-top: 8px;
+      display: inline-block;
+      color: var(--accent);
+      border-bottom: 1px solid var(--accent-soft);
+    }
+    .pub .pub-doi:hover { border-color: var(--accent); }
+
+    /* ---------- STACK ---------- */
+    .stack-row {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 24px;
+      padding: 16px 0;
+      border-top: 1px solid var(--line);
+      align-items: baseline;
+    }
+    .stack-row:last-child { border-bottom: 1px solid var(--line); }
+    .stack-row .label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+    }
+    .stack-row .items {
+      font-family: 'Newsreader', serif;
+      font-size: 17px;
+      line-height: 1.5;
+      color: var(--ink);
+      font-variation-settings: 'opsz' 17;
+    }
+
+    /* ---------- CONTACT ---------- */
+    .contact h2.title { margin-bottom: 24px; }
+    .contact .email {
+      font-family: 'Fraunces', serif;
+      font-weight: 350;
+      font-variation-settings: 'opsz' 144, 'SOFT' 50;
+      font-size: clamp(28px, 5vw, 48px);
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      display: inline-block;
+      margin-bottom: 32px;
+      border-bottom: 1px solid var(--line);
+    }
+    .contact .email:hover { color: var(--accent); border-color: var(--accent); }
+    .contact .links {
+      display: flex; flex-wrap: wrap; gap: 28px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+    }
+
+    .contact .links a { margin-right: 24px; }
+    .contact .links a:last-child { margin-right: 0; }
+
+    /* ---------- FOOTER ---------- */
+    footer {
+      padding: 64px 0 80px;
+      border-top: 1px solid var(--line);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      color: var(--ink-3);
+      text-transform: uppercase;
+      display: flex; justify-content: space-between;
+    }
+
+    /* ---------- ENTRY ANIMATIONS ---------- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .reveal.in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* small screens */
+    @media (max-width: 540px) {
+      .hero { padding: 72px 0 56px; }
+      nav.top ul { gap: 16px; }
+      .stack-row { grid-template-columns: 1fr; gap: 4px; padding: 18px 0; }
+      .work-entry .metrics { gap: 22px; }
+      .work-entry .metrics .metric .v { font-size: 26px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="top">
+    <div class="wrap">
+      <a href="#top" class="name">Angelo Pelisson</a>
+      <ul>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#publications">Papers</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main id="top">
+
+    <!-- HERO -->
+    <header class="hero">
+      <div class="wrap">
+        <div class="eyebrow">Senior Data Scientist · Londrina, Brazil</div>
+        <h1>Production ML<br>for <em>industrial</em><br>domains.</h1>
+        <p class="lede">
+          I build end-to-end machine learning systems where models meet sensors, pipelines, and high-stakes decisions — across oil &amp; gas, finance, and automotive. Five years of computer vision, predictive maintenance, and MLOps in production.
+        </p>
+        <div class="ctas">
+          <a class="primary" href="Angelo_Pelisson_Resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a>
+          <a href="https://www.linkedin.com/in/angelo-pelisson" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://github.com/pelabdang" target="_blank" rel="noopener">GitHub</a>
+          <a href="mailto:angelo.a.pelisson@gmail.com">Email</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- ABOUT -->
+    <section id="about" class="about">
+      <div class="wrap">
+        <div class="section-label" data-num="01">About</div>
+        <h2 class="title">Engineer first, data&nbsp;scientist by craft.</h2>
+        <p>
+          I started in <strong>electrical engineering</strong>, took a master's in electronic systems where I published a comparative study on photovoltaic power forecasting, and then crossed into ML for crash-safety research at <strong>Technische Hochschule Ingolstadt</strong> as a <strong>DAAD scholarship recipient</strong>. That academic detour set the tone for the rest of my work: physics-aware modeling, careful evaluation, and a low tolerance for results that don't survive contact with reality.
+        </p>
+        <p>
+          Today I'm a Senior Data Scientist in oil &amp; gas, leading technical work on a fuzzy inference system for offshore process safety in partnership with a major energy operator and a top research university. Before that, I built corrosion-detection computer vision, anomaly-detection pipelines on offshore sensor networks, and predictive-maintenance models for industrial spindles across dozens of assets.
+        </p>
+        <p>
+          I'm equally at home shipping the model and shipping the infrastructure around it. I designed my team's deployment framework, QA library, and automated backtesting pipeline — the unglamorous plumbing that turns prototypes into 100+ production models with auditable behavior. <strong>$1M+ in client savings</strong> and contributions to strategic enterprise accounts followed.
+        </p>
+        <p>
+          I'm currently <strong>open to Senior Data Scientist and Senior MLE roles in the US and EU</strong>, including fully remote. If your team works on industrial AI, safety-critical ML, or production ML platforms, I'd love to talk.
+        </p>
+      </div>
+    </section>
+
+    <!-- WORK -->
+    <section id="work">
+      <div class="wrap">
+        <div class="section-label" data-num="02">Selected Work</div>
+        <h2 class="title">A few projects worth talking about.</h2>
+
+        <!-- ENTRY 1 -->
+        <article class="work-entry">
+          <div class="meta">
+            <span><span class="num">01 ·</span> Process Safety · Oil &amp; Gas</span>
+            <span>2025 — Present</span>
+          </div>
+          <h3>Fuzzy BowTie inference system for offshore process safety</h3>
+          <p class="blurb">
+            Lead technical owner of a risk-assessment system combining fuzzy inference with probability trees, delivered in partnership with a major energy operator and a top research university. Designed the architecture, ran end-to-end data analysis on highly fragmented industrial data, and built a tag-clustering algorithm based on business rules that drastically reduced base complexity. First production milestone delivered with full stakeholder approval.
+          </p>
+          <div class="metrics">
+            <div class="metric"><span class="v">~90%</span><span class="k">data complexity reduced</span></div>
+            <div class="metric"><span class="v">2</span><span class="k">external partners led</span></div>
+          </div>
+          <div class="tags">
+            <span>Fuzzy Inference</span><span>Probability Trees</span><span>Python</span><span>Process Safety</span><span>Stakeholder Mgmt</span>
+          </div>
+        </article>
+
+        <!-- ENTRY 2 -->
+        <article class="work-entry">
+          <div class="meta">
+            <span><span class="num">02 ·</span> MLOps · Platform</span>
+            <span>2025</span>
+          </div>
+          <h3>Accelerated deployment framework &amp; QA library</h3>
+          <p class="blurb">
+            Architected the team's end-to-end deployment workflow and a modular Python QA library for unit and integration testing across dev/prod environments. Restructured the model catalog (50+ legacy entries) and authored the team-wide development &amp; deployment guidebook. Adopted across the data science team and integrated into the lifecycle of 100+ production models.
+          </p>
+          <div class="metrics">
+            <div class="metric"><span class="v">13×</span><span class="k">deploy throughput</span></div>
+            <div class="metric"><span class="v">96%</span><span class="k">validation cycle cut</span></div>
+            <div class="metric"><span class="v">100+</span><span class="k">production models</span></div>
+          </div>
+          <div class="tags">
+            <span>MLOps</span><span>Python</span><span>QA Frameworks</span><span>Azure DevOps</span><span>Documentation</span>
+          </div>
+        </article>
+
+        <!-- ENTRY 3 -->
+        <article class="work-entry">
+          <div class="meta">
+            <span><span class="num">03 ·</span> Computer Vision · Industrial Inspection</span>
+            <span>2024 — 2025</span>
+          </div>
+          <h3>Corrosion detection on offshore equipment</h3>
+          <p class="blurb">
+            Led a computer vision PoC for corrosion detection on offshore industrial installations using DeepLab semantic segmentation, with data augmentation and patching techniques for high-resolution 360° imagery. Built and supervised the labeling pipeline with LabelMe and established baselines for production rollout.
+          </p>
+          <div class="metrics">
+            <div class="metric"><span class="v">~70%</span><span class="k">F1 / IoU</span></div>
+            <div class="metric"><span class="v">1,500</span><span class="k">images labeled</span></div>
+          </div>
+          <div class="tags">
+            <span>PyTorch</span><span>DeepLab</span><span>Semantic Segmentation</span><span>LabelMe</span><span>Data Augmentation</span>
+          </div>
+        </article>
+
+        <!-- ENTRY 4 -->
+        <article class="work-entry">
+          <div class="meta">
+            <span><span class="num">04 ·</span> Predictive Maintenance · Industrial</span>
+            <span>2024 — 2025</span>
+          </div>
+          <h3>Predictive maintenance &amp; sensor anomaly detection</h3>
+          <p class="blurb">
+            Built predictive-maintenance models for industrial spindle telemetry across 30+ assets and 4 clients, plus anomaly-detection pipelines for offshore sensor data. Early identification of an asset failure was instrumental in a key client renewing a 1-year contract. Also developed a knowledge-based sensor-comparison model with adaptive normalization to detect faults across redundant and analog sensors at vessel scale.
+          </p>
+          <div class="metrics">
+            <div class="metric"><span class="v">30+</span><span class="k">industrial assets</span></div>
+            <div class="metric"><span class="v">1,000+</span><span class="k">sensors per vessel</span></div>
+          </div>
+          <div class="tags">
+            <span>Time-series</span><span>Anomaly Detection</span><span>Sensor Analytics</span><span>Python</span><span>Databricks</span>
+          </div>
+        </article>
+
+        <!-- ENTRY 5 -->
+        <article class="work-entry">
+          <div class="meta">
+            <span><span class="num">05 ·</span> Probabilistic ML · Public Utilities</span>
+            <span>2022 — 2024</span>
+          </div>
+          <h3>Damage prediction for a metropolitan gas network</h3>
+          <p class="blurb">
+            Designed a probabilistic ML model to predict damage risk to São Paulo's underground gas distribution network from third-party construction work (20–30 sites/day). Output directly drove field-engineering routing and prioritization. Also delivered a billing-rule optimization model and a People Analytics solution that identified improper reimbursements.
+          </p>
+          <div class="metrics">
+            <div class="metric"><span class="v">~$55K</span><span class="k">monthly cost savings (USD)</span></div>
+            <div class="metric"><span class="v">+70%</span><span class="k">field productivity</span></div>
+            <div class="metric"><span class="v">~$165K</span><span class="k">additional savings (USD)</span></div>
+          </div>
+          <div class="tags">
+            <span>Probabilistic Modeling</span><span>Python</span><span>Azure ML</span><span>Databricks</span><span>h2o.ai</span>
+          </div>
+        </article>
+
+        <!-- ENTRY 6 -->
+        <article class="work-entry">
+          <div class="meta">
+            <span><span class="num">06 ·</span> Research · Surrogate Modeling</span>
+            <span>2020 — 2021 · DAAD · Germany</span>
+          </div>
+          <h3>Gaussian Process surrogates for crash simulation</h3>
+          <p class="blurb">
+            Developed Gaussian Process surrogate models at <em>CARISSMA / Technische Hochschule Ingolstadt</em> (DAAD scholarship) to replace computationally expensive Finite Element crash simulations, while maintaining low Mean Absolute Error against the FE ground truth. Published in VDI on metamodel robustness and predictive power considering human diversity.
+          </p>
+          <div class="metrics">
+            <div class="metric"><span class="v">24×</span><span class="k">simulation speedup</span></div>
+            <div class="metric"><span class="v">72h → 3h</span><span class="k">runtime reduced</span></div>
+          </div>
+          <div class="tags">
+            <span>Gaussian Processes</span><span>Surrogate Modeling</span><span>FE Simulation</span><span>Python</span><span>Research</span>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- PUBLICATIONS -->
+    <section id="publications">
+      <div class="wrap">
+        <div class="section-label" data-num="03">Publications</div>
+        <h2 class="title">Peer-reviewed.</h2>
+
+        <div class="pub">
+          <div class="pub-meta">VDI · 2022 · pp. 313–326</div>
+          <div class="pub-title">Rapid Estimation of Occupant Crash Behavior Considering Human Diversity: Robustness, Data Intensity and Predictive Power of Metamodels</div>
+          <div class="pub-authors">F. Plaschkies, O. Vaculin, <strong>A. Pelisson</strong></div>
+          <a class="pub-doi" href="https://doi.org/10.51202/9783181023877-313" target="_blank" rel="noopener">doi.org/10.51202/9783181023877-313 →</a>
+        </div>
+
+        <div class="pub">
+          <div class="pub-meta">ENIAC · 2020 · pp. 555–566</div>
+          <div class="pub-title">Comparative Study of Photovoltaic Power Forecasting Methods</div>
+          <div class="pub-authors"><strong>A. Pelisson</strong>, T. Covoes, A. Spengler, P. Jaskowiak</div>
+          <a class="pub-doi" href="https://doi.org/10.5753/eniac.2020.12159" target="_blank" rel="noopener">doi.org/10.5753/eniac.2020.12159 →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- STACK -->
+    <section id="stack">
+      <div class="wrap">
+        <div class="section-label" data-num="04">Stack</div>
+        <h2 class="title">Tools of the trade.</h2>
+
+        <div class="stack-row">
+          <div class="label">Languages</div>
+          <div class="items">Python · SQL · PySpark · Bash</div>
+        </div>
+        <div class="stack-row">
+          <div class="label">ML / DL</div>
+          <div class="items">PyTorch · TensorFlow · scikit-learn · XGBoost · DeepLab · semantic segmentation · anomaly detection · time-series · Gaussian Processes · fuzzy inference · Bayesian methods</div>
+        </div>
+        <div class="stack-row">
+          <div class="label">MLOps</div>
+          <div class="items">MLflow · Docker · Git · Azure DevOps · CI/CD · model monitoring · QA frameworks · automated backtesting</div>
+        </div>
+        <div class="stack-row">
+          <div class="label">Cloud &amp; Data</div>
+          <div class="items">Azure (ML, Data Factory, Synapse, Pipelines, Storage) · Databricks (Lakehouse, Delta Lake) · AWS SageMaker · h2o.ai</div>
+        </div>
+        <div class="stack-row">
+          <div class="label">Domains</div>
+          <div class="items">Computer Vision · Predictive Maintenance · Process Safety &amp; Risk · Anomaly Detection · Credit Risk · Sensor Analytics</div>
+        </div>
+        <div class="stack-row">
+          <div class="label">Languages, human</div>
+          <div class="items">Portuguese (native) · English (C1) · German (A2) · Spanish (A2)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="contact">
+      <div class="wrap">
+        <div class="section-label" data-num="05">Contact</div>
+        <h2 class="title">Hiring, collaborating, or just curious — drop a line.</h2>
+        <a class="email" href="mailto:angelo.a.pelisson@gmail.com">angelo.a.pelisson@gmail.com</a>
+        <div class="links">
+          <a href="https://www.linkedin.com/in/angelo-pelisson" target="_blank" rel="noopener">LinkedIn ↗</a>
+          <a href="https://github.com/pelabdang" target="_blank" rel="noopener">GitHub ↗</a>
+          <a href="Angelo_Pelisson_Resume.pdf" target="_blank" rel="noopener">Resume (PDF) ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="wrap" style="display:flex; justify-content:space-between; padding-top:0; padding-bottom:0;">
+        <span>© 2026 · Angelo Pelisson</span>
+        <span>Londrina, Brazil</span>
+      </div>
+    </footer>
+
+  </main>
+
+  <script>
+    // simple reveal-on-scroll
+    const reveals = document.querySelectorAll('.work-entry, .pub, .stack-row, .about p, h2.title, .section-label');
+    reveals.forEach(el => el.classList.add('reveal'));
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+    reveals.forEach(el => io.observe(el));
+  </script>
+
+</body>
+</html>
