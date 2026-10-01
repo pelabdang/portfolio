@@ -308,7 +308,7 @@
       margin: 0 0 8px;
     }
     .pub .pub-authors { color: var(--ink-2); font-size: 16px; }
-    .pub .pub-doi {
+    .pub .pub-doi, .work-entry .pub-doi {
       font-family: 'JetBrains Mono', monospace;
       font-size: 12px;
       margin-top: 8px;
@@ -316,7 +316,8 @@
       color: var(--accent);
       border-bottom: 1px solid var(--accent-soft);
     }
-    .pub .pub-doi:hover { border-color: var(--accent); }
+    .pub .pub-doi:hover, .work-entry .pub-doi:hover { border-color: var(--accent); }
+    .work-entry .pub-doi { justify-self: start; margin-top: 4px; }
 
     /* ---------- STACK ---------- */
     .stack-row {
@@ -581,10 +582,41 @@ I build end-to-end machine learning systems for industrial domains, where models
       </div>
     </section>
 
+    <!-- SIDE PROJECT -->
+    <section id="fincontrol">
+      <div class="wrap">
+        <div class="section-label" data-num="03">Side Project</div>
+        <h2 class="title">Something I built for myself, and shipped.</h2>
+
+        <article class="work-entry">
+          <div class="meta">
+            <span><span class="num">FinControl ·</span> Personal Finance · Full-stack</span>
+            <span>2026 — Present</span>
+          </div>
+          <h3>FinControl: personal finance, out of the spreadsheet</h3>
+          <p class="blurb">
+            A web app I designed and built end to end to replace the Excel workbook I used to run my household budget. It tracks recurring fixed expenses on debit and credit, installment purchases with automatic parcel scheduling, variable spending by category against monthly targets, planned versus actual budgets, incomes and payment accounts, all rolled up into a monthly dashboard and reports.
+          </p>
+          <p class="blurb">
+            Under the hood it is a Flask REST API with a service layer as the single source of truth for monthly totals, per-user data isolation enforced in request middleware, and PostgreSQL with versioned migrations, behind a React and Material UI frontend. It runs in production at fincontrol.digital, with nightly encrypted database backups automated through GitHub Actions and a pytest and Vitest suite guarding each change.
+          </p>
+          <div class="metrics">
+            <div class="metric"><span class="v">8</span><span class="k">finance modules</span></div>
+            <div class="metric"><span class="v">Nightly</span><span class="k">encrypted backups</span></div>
+            <div class="metric"><span class="v">Solo</span><span class="k">design to deploy</span></div>
+          </div>
+          <div class="tags">
+            <span>Python</span><span>Flask</span><span>PostgreSQL</span><span>SQLAlchemy</span><span>React</span><span>Material UI</span><span>Docker</span><span>GitHub Actions</span>
+          </div>
+          <a class="pub-doi" href="https://fincontrol.digital" target="_blank" rel="noopener">fincontrol.digital →</a>
+        </article>
+      </div>
+    </section>
+
     <!-- PUBLICATIONS -->
     <section id="publications">
       <div class="wrap">
-        <div class="section-label" data-num="03">Publications</div>
+        <div class="section-label" data-num="04">Publications</div>
         <h2 class="title">Peer-reviewed.</h2>
 
         <div class="pub">
@@ -606,7 +638,7 @@ I build end-to-end machine learning systems for industrial domains, where models
     <!-- STACK -->
     <section id="stack">
       <div class="wrap">
-        <div class="section-label" data-num="04">Stack</div>
+        <div class="section-label" data-num="05">Stack</div>
         <h2 class="title">Tools of the trade.</h2>
 
         <div class="stack-row">
@@ -639,7 +671,7 @@ I build end-to-end machine learning systems for industrial domains, where models
     <!-- CONTACT -->
     <section id="contact" class="contact">
       <div class="wrap">
-        <div class="section-label" data-num="05">Contact</div>
+        <div class="section-label" data-num="06">Contact</div>
         <h2 class="title">Hiring, collaborating, or just curious — drop a line.</h2>
         <a class="email" href="mailto:angelo.a.pelisson@gmail.com">angelo.a.pelisson@gmail.com</a>
         <div class="links">
