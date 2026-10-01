@@ -308,7 +308,7 @@
       margin: 0 0 8px;
     }
     .pub .pub-authors { color: var(--ink-2); font-size: 16px; }
-    .pub .pub-doi {
+    .pub .pub-doi, .work-entry .pub-doi {
       font-family: 'JetBrains Mono', monospace;
       font-size: 12px;
       margin-top: 8px;
@@ -316,7 +316,8 @@
       color: var(--accent);
       border-bottom: 1px solid var(--accent-soft);
     }
-    .pub .pub-doi:hover { border-color: var(--accent); }
+    .pub .pub-doi:hover, .work-entry .pub-doi:hover { border-color: var(--accent); }
+    .work-entry .pub-doi { justify-self: start; margin-top: 4px; }
 
     /* ---------- STACK ---------- */
     .stack-row {
@@ -581,10 +582,29 @@ I build end-to-end machine learning systems for industrial domains, where models
       </div>
     </section>
 
+    <!-- SIDE PROJECT -->
+    <section id="fincontrol">
+      <div class="wrap">
+        <div class="section-label" data-num="03">Side Project</div>
+        <h2 class="title">Something I built for myself, and shipped.</h2>
+
+        <article class="work-entry">
+          <h3>FinControl</h3>
+          <p class="blurb">
+            A personal finance web app I built end to end to replace my budgeting spreadsheet, tracking expenses, installments, budgets and income month by month. It runs in production with a Flask and PostgreSQL backend and a React frontend.
+          </p>
+          <div class="tags">
+            <span>Python</span><span>Flask</span><span>PostgreSQL</span><span>React</span><span>Docker</span>
+          </div>
+          <a class="pub-doi" href="https://fincontrol.digital" target="_blank" rel="noopener">fincontrol.digital →</a>
+        </article>
+      </div>
+    </section>
+
     <!-- PUBLICATIONS -->
     <section id="publications">
       <div class="wrap">
-        <div class="section-label" data-num="03">Publications</div>
+        <div class="section-label" data-num="04">Publications</div>
         <h2 class="title">Peer-reviewed.</h2>
 
         <div class="pub">
@@ -606,7 +626,7 @@ I build end-to-end machine learning systems for industrial domains, where models
     <!-- STACK -->
     <section id="stack">
       <div class="wrap">
-        <div class="section-label" data-num="04">Stack</div>
+        <div class="section-label" data-num="05">Stack</div>
         <h2 class="title">Tools of the trade.</h2>
 
         <div class="stack-row">
@@ -639,7 +659,7 @@ I build end-to-end machine learning systems for industrial domains, where models
     <!-- CONTACT -->
     <section id="contact" class="contact">
       <div class="wrap">
-        <div class="section-label" data-num="05">Contact</div>
+        <div class="section-label" data-num="06">Contact</div>
         <h2 class="title">Hiring, collaborating, or just curious — drop a line.</h2>
         <a class="email" href="mailto:angelo.a.pelisson@gmail.com">angelo.a.pelisson@gmail.com</a>
         <div class="links">
